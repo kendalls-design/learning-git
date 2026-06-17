@@ -121,6 +121,8 @@ main {
 .concept {
   padding: var(--section-gap) 0 0;
   border-top: 1px solid var(--cream-dark);
+  display: flex;
+  flex-direction: column;
 }
 
 .concept:first-of-type {
@@ -152,20 +154,63 @@ main {
   color: var(--orange);
 }
 
-.concept-grid {
+/* ── Animation panel — full width, always last ── */
+.animation-panel {
+  order: 3;
+  background: var(--white);
+  border: 2px solid var(--cream-dark);
+  border-radius: 12px;
+  padding: 2rem 2.5rem;
+  margin-top: 2.5rem;
+}
+
+.animation-panel svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.animation-label {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--gray-light);
+  text-align: center;
+  margin: 0.85rem 0 0;
+}
+
+/* ── Concept body — 3-column text grid ── */
+.concept-body {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  grid-template-columns: 2fr 2fr 1.5fr;
+  gap: 2.5rem;
   align-items: start;
 }
 
-@media (max-width: 768px) {
-  .concept-grid {
-    grid-template-columns: 1fr;
+@media (max-width: 860px) {
+  .concept-body {
+    grid-template-columns: 1fr 1fr;
+  }
+  .concept-col:last-child {
+    grid-column: 1 / -1;
   }
 }
 
-.concept-text h3 {
+@media (max-width: 560px) {
+  .concept-body {
+    grid-template-columns: 1fr;
+  }
+  .concept-col:last-child {
+    grid-column: auto;
+  }
+  .animation-panel {
+    padding: 1.25rem;
+  }
+}
+
+.concept-col h3 {
   font-family: var(--font-display);
   font-size: 1rem;
   font-weight: 700;
@@ -175,30 +220,26 @@ main {
   margin: 0 0 0.5rem;
 }
 
-.concept-text h3:not(:first-child) {
-  margin-top: 1.5rem;
-}
-
-.concept-text p {
+.concept-col p {
   margin: 0 0 0.75rem;
   color: var(--gray);
 }
 
-.concept-text ul {
+.concept-col ul {
   margin: 0 0 0.75rem;
   padding-left: 1.25rem;
   color: var(--gray);
 }
 
-.concept-text li {
+.concept-col li {
   margin-bottom: 0.35rem;
 }
 
-.concept-text li::marker {
+.concept-col li::marker {
   color: var(--orange);
 }
 
-.concept-text code {
+.concept-col code {
   font-family: ui-monospace, "Cascadia Code", monospace;
   font-size: 0.92em;
   background: var(--orange-muted);
@@ -237,43 +278,15 @@ main {
   font-size: 0.9rem;
 }
 
-/* ── Animation panel ── */
-.animation-panel {
-  background: var(--white);
-  border: 2px solid var(--cream-dark);
-  border-radius: 8px;
-  padding: 1.25rem;
-  position: sticky;
-  top: 5.5rem;
-}
-
-.animation-panel svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.animation-label {
-  font-family: var(--font-display);
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--gray-light);
-  text-align: center;
-  margin: 0.75rem 0 0;
-}
-
 /* ── SVG shared styles ── */
 .svg-bg { fill: #faf8f4; }
-.svg-line { fill: none; stroke: #ccc; stroke-width: 2; stroke-linecap: round; }
-.svg-branch { fill: none; stroke: var(--orange); stroke-width: 3; stroke-linecap: round; }
-.svg-branch-alt { fill: none; stroke: #3a86ff; stroke-width: 3; stroke-linecap: round; }
+.svg-branch { fill: none; stroke: var(--orange); stroke-width: 3.5; stroke-linecap: round; }
+.svg-branch-alt { fill: none; stroke: #3a86ff; stroke-width: 3.5; stroke-linecap: round; }
 .svg-commit { fill: var(--orange); }
 .svg-commit-alt { fill: #3a86ff; }
-.svg-label { font-family: var(--font-display); font-size: 11px; fill: var(--gray); font-weight: 600; }
-.svg-title { font-family: var(--font-display); font-size: 13px; fill: var(--black); font-weight: 700; }
-.svg-box { fill: var(--white); stroke: var(--cream-dark); stroke-width: 1.5; }
+.svg-label { font-family: var(--font-display); font-size: 15px; fill: var(--gray); font-weight: 600; }
+.svg-title { font-family: var(--font-display); font-size: 19px; fill: var(--black); font-weight: 700; }
+.svg-box { fill: var(--white); stroke: var(--cream-dark); stroke-width: 2; }
 .svg-highlight { fill: rgba(232, 93, 4, 0.25); }
 .svg-highlight-remove { fill: rgba(220, 53, 69, 0.2); }
 .svg-highlight-add { fill: rgba(40, 167, 69, 0.2); }
